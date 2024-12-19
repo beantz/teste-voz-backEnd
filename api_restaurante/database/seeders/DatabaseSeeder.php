@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         //User::factory(10)->create();
 
         $this->call(bebidasSeeder::class);
+        $this->call(pagamentoSeeder::class);
 
     }
 }

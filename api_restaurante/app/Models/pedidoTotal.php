@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class pedidoTotal extends Model
 {
     //
-    protected $table = 'total pedido';
+    protected $table = 'total_pedido';
     
-    protected $fillable = ['nome', 'refeição_id', 'refeição_saudaveis_id', 'bebida_id', 'total'];
+    protected $fillable = ['nome', 'refeição_id', 'bebida_id', 'total'];
 }

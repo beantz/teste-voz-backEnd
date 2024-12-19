@@ -11,7 +11,22 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        //definindo globais
+        $middleware->use([
+            //App\Http\Middleware\AcessLogMiddleware::class,
+            //App\Http\Middleware\AutenticacaoMiddleware::class
+        ]);
+
+        //definindo apelidos
+        $middleware->alias([
+            'acesso.log' => App\Http\Middleware\AcessLogMiddleware::class
+        ]);
+
+        //definindo a grupo especifico como web ou api
+        $middleware->web(append:[
+            App\Http\Middleware\AutenticacaoMiddleware::class
+        ]);
+        
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

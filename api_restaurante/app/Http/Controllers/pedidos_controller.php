@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\pedidos;
 use Illuminate\Http\Request;
+use App\Models\pagamento;
+use Symfony\Component\Console\Input\Input;
 
 class pedidos_controller extends Controller
 {
     //
     public function pedidos(){
 
-        return view('pedidos');
+        $pagamento = pagamento::all();
+
+        return view('pedidos', ['pagamento' => $pagamento]);
 
     }
 
@@ -22,7 +26,7 @@ class pedidos_controller extends Controller
             'nome' => 'required|min:5',
             'refeição' => 'required|min:5',
             'bebida' => 'required|min:5',
-            'pagamento' => 'required'
+            'pagamento_id' => 'required'
 
         ],
         [
@@ -31,8 +35,11 @@ class pedidos_controller extends Controller
         ]
     
     );
-        //return dd($request->all());
-        pedidos::create($request->all());
+    
+        $totalPedido = pedidos::create($request->all());
+        
+        return redirect()->route('pedido.total', ['pedido' => $totalPedido]);
 
     }
+
 }
